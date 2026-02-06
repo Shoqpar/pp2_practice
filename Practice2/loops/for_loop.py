@@ -1,2 +1,2 @@
 for x in range (5):
-    print (i)
+    print (x)
