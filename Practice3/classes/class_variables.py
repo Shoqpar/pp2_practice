@@ -1,10 +1,10 @@
 # class_variables.py
 
 class Car:
-    wheels = 4  # переменная класса
+    wheels = 4
 
     def __init__(self, brand):
-        self.brand = brand  # переменная объекта
+        self.brand = brand
 
 car1 = Car("Toyota")
 car2 = Car("BMW")
