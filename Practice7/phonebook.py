@@ -33,7 +33,7 @@ def import_from_csv(file_name):
                     contacts
                 )
                 conn.commit()
-                print(f"Импортировано записей: {len(contacts)}")
+                print(f"Imported records: {len(contacts)}")
     except FileNotFoundError:
         print("Файл contacts.csv не найден!")
 
@@ -66,7 +66,7 @@ def delete_contact(identifier):
         with conn.cursor() as cur:
             cur.execute("DELETE FROM phonebook WHERE first_name = %s OR phone = %s;", (identifier, identifier))
             conn.commit()
-            print(f"Удалено записей: {cur.rowcount}")
+            print(f"Deleted records: {cur.rowcount}")
 
 def display_all_contacts():
     with get_db_connection() as conn:
