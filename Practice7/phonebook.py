@@ -68,25 +68,45 @@ def delete_contact(identifier):
             conn.commit()
             print(f"Удалено записей: {cur.rowcount}")
 
+def display_all_contacts():
+    with get_db_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT id, first_name, phone FROM phonebook ORDER BY id;")
+            
+            rows = cur.fetchall()
+            
+            if not rows:
+                print("\nPhonebook is empty.")
+                return
+
+            print("\n--- list of all contacts ---")
+            print(f"{'ID':<5} | {'Name':<15} | {'Tel':<15}")
+            print("-" * 40)
+            
+            for row in rows:
+                print(f"{row[0]:<5} | {row[1]:<15} | {row[2]:<15}")
+
 if __name__ == "__main__":
     create_table()
     while True:
         print("\n--- PhoneBook Menu ---")
-        print("1. Import CSV | 2. Add Contact | 3. Update | 4. Search | 5. Delete | 6. Exit")
+        print("1. Import CSV | 2. Show all contacts | 3. Add Contact | 4. Update | 5. Search | 6. Delete | 7. Exit")
         choice = input("Select: ")
 
         if choice == '1':
             import_from_csv('contacts.csv')
         elif choice == '2':
-            add_contact(input("Name: "), input("Phone: "))
+            display_all_contacts()
         elif choice == '3':
-            update_contact(input("Target Name: "), input("New Phone: "))
+            add_contact(input("Name: "), input("Phone: "))
         elif choice == '4':
+            update_contact(input("Target Name: "), input("New Phone: "))
+        elif choice == '5':
             print("Search by: 1. Name 2. Phone Prefix")
             sub = input("Choice: ")
             val = input("Value: ")
             query_contacts('name' if sub == '1' else 'phone', val)
-        elif choice == '5':
-            delete_contact(input("Name or Phone to delete: "))
         elif choice == '6':
+            delete_contact(input("Name or Phone to delete: "))
+        elif choice == '7':
             break
