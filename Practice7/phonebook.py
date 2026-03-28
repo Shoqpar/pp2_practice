@@ -20,7 +20,7 @@ def import_from_csv(file_name):
     
     contacts = []
     try:
-        with open(file_path, 'r', encoding='utf-8') as f: #
+        with open(file_path, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
             next(reader, None)
             for row in reader:
@@ -35,7 +35,7 @@ def import_from_csv(file_name):
                 conn.commit()
                 print(f"Imported records: {len(contacts)}")
     except FileNotFoundError:
-        print("Файл contacts.csv не найден!")
+        print("File contacts.csv not found")
 
 def add_contact(name, phone):
     with get_db_connection() as conn:
@@ -48,7 +48,7 @@ def update_contact(target_name, new_phone):
         with conn.cursor() as cur:
             cur.execute("UPDATE phonebook SET phone = %s WHERE first_name = %s;", (new_phone, target_name))
             conn.commit()
-            print(f"Обновлено строк: {cur.rowcount}")
+            print(f"Updated rows: {cur.rowcount}")
 
 def query_contacts(filter_type, value):
     with get_db_connection() as conn:
