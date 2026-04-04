@@ -1,5 +1,4 @@
 import csv
-from contextlib import closing
 from connect import get_db_connection
 from pathlib import Path
 
@@ -8,7 +7,7 @@ def setup_database():
     base_dir = Path(__file__).resolve().parent
 
     with get_db_connection() as conn:
-        with closing(conn.cursor()) as cur:
+        with conn.cursor() as cur:
             cur.execute("""
                 CREATE TABLE IF NOT EXISTS contacts (
                     id SERIAL PRIMARY KEY,
@@ -41,42 +40,42 @@ def import_contacts_from_csv(file_path):
                 phones.append(phone.strip())
 
     with get_db_connection() as conn:
-        with closing(conn.cursor()) as cur:
+        with conn.cursor() as cur:
             cur.execute("CALL insert_many_contacts(%s, %s);", (names, phones))
             conn.commit()
 
 
 def get_all_contacts():
     with get_db_connection() as conn:
-        with closing(conn.cursor()) as cur:
+        with conn.cursor() as cur:
             cur.execute("SELECT id, name, phone FROM contacts ORDER BY id;")
             return cur.fetchall()
 
 
 def search_contacts(pattern):
     with get_db_connection() as conn:
-        with closing(conn.cursor()) as cur:
+        with conn.cursor() as cur:
             cur.execute("SELECT * FROM search_contacts(%s);", (pattern,))
             return cur.fetchall()
 
 
 def get_contacts_paginated(limit, offset):
     with get_db_connection() as conn:
-        with closing(conn.cursor()) as cur:
+        with conn.cursor() as cur:
             cur.execute("SELECT * FROM get_contacts_paginated(%s, %s);", (limit, offset))
             return cur.fetchall()
 
 
 def upsert_contact(name, phone):
     with get_db_connection() as conn:
-        with closing(conn.cursor()) as cur:
+        with conn.cursor() as cur:
             cur.execute("CALL upsert_contact(%s, %s);", (name, phone))
             conn.commit()
 
 
 def delete_contact(value):
     with get_db_connection() as conn:
-        with closing(conn.cursor()) as cur:
+        with conn.cursor() as cur:
             cur.execute("CALL delete_contact_by_value(%s);", (value,))
             conn.commit()
 
