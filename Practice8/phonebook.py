@@ -31,7 +31,7 @@ def import_contacts_from_csv(file_path):
 
     with open(file_path, "r", encoding="utf-8") as file:
         reader = csv.reader(file)
-        next(reader, None)  # если есть заголовок
+        next(reader, None)
 
         for row in reader:
             if len(row) == 2:
