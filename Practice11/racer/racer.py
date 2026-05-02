@@ -113,7 +113,7 @@ player = Player()
 enemy = Enemy()
 coins = pygame.sprite.Group()
 
-# Generate several coins on the road
+# Gеnerate several coins on the road
 for _ in range(4):
     coins.add(Coin())
 

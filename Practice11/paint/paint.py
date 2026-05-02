@@ -156,7 +156,7 @@ while running:
                 base_layer.fill(WHITE)
                 screen.blit(base_layer, (0, 0))
 
-    # Отображение панели инструментов вверху экрана
+    # Отображение панeели инструментов вверху экрана
     if not drawing:
         screen.blit(base_layer, (0, 0))
 

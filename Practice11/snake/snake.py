@@ -76,7 +76,7 @@ while running:
     direction = next_direction
     head_x, head_y = snake[0]
 
-    # 1. Движение головы
+    # 1. Движение головвы
     if direction == "UP":
         head_y -= BLOCK
     elif direction == "DOWN":
