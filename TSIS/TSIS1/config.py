@@ -1,8 +1,7 @@
-# db connection settings
 DB_CONFIG = {
-    "host":     "localhost",
-    "port":     5432,
-    "dbname":   "phonebook",
-    "user":     "shoqpar",
-    "password": "password",
+    "host": "localhost",
+    "port": 5432,
+    "dbname": "phonebook",
+    "user": "shoqpar",
+    "password": "882100830"
 }
